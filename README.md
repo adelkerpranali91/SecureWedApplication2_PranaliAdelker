@@ -1,3 +1,6 @@
-# Secure Web Development Project
-Initial Flask project setup.
-test test
+S.H.E.I.L.D -- Secure Clinic Web Application 
+
+Name: Pranali Prabhaker Adelker
+Student ID: 24203513
+
+
