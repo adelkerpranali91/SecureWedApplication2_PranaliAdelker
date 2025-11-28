@@ -1,0 +1,130 @@
+#REGISTRSTION PAGE
+{% extends "base.html" %}
+{% block content %}
+<div class="card shadow-sm mx-auto" style="max-width:760px;">
+  <div class="card-body">
+    <h3 class="card-title mb-3">Register (Insecure baseline)</h3>
+
+    #REGISTRSTION FORM
+    <form method="post" id="registerForm" novalidate>
+      <div class="row g-2">
+        <div class="col-md-6">
+          <label class="form-label">Full name *</label>
+          #NO VALIDATION 
+          <input class="form-control" name="full_name" id="full_name" required>
+          <div class="invalid-feedback">Full name required</div>
+        </div>
+
+        <div class="col-md-6">
+          <label class="form-label">Email *</label>
+          <input class="form-control" type="email" name="email" id="email" required>
+          <div class="invalid-feedback">Valid email required</div>
+        </div>
+      </div>
+
+      <div class="row g-2 mt-2">
+        <div class="col-md-6">
+          <label class="form-label">Phone (include country code) *</label>
+          <input class="form-control" name="phone" id="phone" placeholder="+" required>
+          <div class="invalid-feedback">Phone required</div>
+        </div>
+
+        <div class="col-md-6">
+          <label class="form-label">Date of birth *</label>
+          <input class="form-control" name="date_of_birth" id="date_of_birth" type="date" required>
+          <div class="invalid-feedback">DOB required</div>
+        </div>
+      </div>
+
+      <div class="row g-2 mt-2">
+        <div class="col-md-6">
+          <label class="form-label">Password *</label>
+          <div class="input-group">
+            <input class="form-control" type="password" name="password" id="password" required>
+            <button type="button" class="btn btn-outline-secondary" id="togglePass">Show</button>
+          </div>
+          <div class="form-text">Minimum 6 characters.</div>
+        </div>
+
+        <div class="col-md-6">
+          <label class="form-label">Confirm Password *</label>
+          <input class="form-control" type="password" name="confirm_password" id="confirm_password" required>
+          <div class="invalid-feedback">Passwords must match</div>
+        </div>
+      </div>
+
+      <div class="mt-3">
+        <label class="form-label">Address *</label>
+        <textarea class="form-control" name="address" id="address" rows="2" required></textarea>
+        <div class="invalid-feedback">Address required</div>
+      </div>
+
+      <div class="row g-2 mt-2">
+        <div class="col-md-6">
+          <label class="form-label">Emergency contact name *</label>
+          <input class="form-control" name="emergency_name" id="emergency_name" required>
+        </div>
+        <div class="col-md-6">
+          <label class="form-label">Emergency contact phone (include country code) *</label>
+          <input class="form-control" name="emergency_phone" id="emergency_phone" placeholder="+353 8..." required>
+        </div>
+      </div>
+
+      <div class="row g-2 mt-2">
+        <div class="col-md-6">
+          <label class="form-label">Insurance number (optional)</label>
+          <input class="form-control" name="insurance_number" id="insurance_number">
+        </div>
+
+        # INSECURE ROLE SELECTION
+        <div class="col-md-6">
+          <label class="form-label">Role *</label>
+          <select class="form-select" name="role" id="role">
+            <option value="patient">Patient</option>
+            <option value="doctor">Doctor</option>
+          </select>
+        </div>
+      </div>
+
+      <div class="mt-3 d-flex justify-content-between">
+        <a href="{{ url_for('login') }}" class="btn btn-link">Already have an account?</a>
+        <button class="btn btn-primary" type="submit">Register</button>
+      </div>
+    </form>
+  </div>
+</div>
+
+<script>
+
+  // JAVASCRIPT FOR BUTTONS
+  const form = document.getElementById('registerForm');
+  const pass = document.getElementById('password');
+  const confirm = document.getElementById('confirm_password');
+  const toggle = document.getElementById('togglePass');
+
+  toggle.addEventListener('click', () => {
+    if (pass.type === 'password') { pass.type = 'text'; confirm.type = 'text'; toggle.textContent = 'Hide'; }
+    else { pass.type = 'password'; confirm.type = 'password'; toggle.textContent = 'Show'; }
+  });
+
+  form.addEventListener('submit', (e) => {
+
+    if (!form.checkValidity()) {
+      form.classList.add('was-validated');
+      e.preventDefault();
+      return;
+    }
+    if (pass.value.length < 6) {
+      alert('Password must be at least 6 characters (demo).');
+      e.preventDefault();
+      return;
+    }
+    if (pass.value !== confirm.value) {
+      alert('Passwords do not match.');
+      e.preventDefault();
+      return;
+    }
+    // SUBMIT
+  });
+</script>
+{% endblock %}
