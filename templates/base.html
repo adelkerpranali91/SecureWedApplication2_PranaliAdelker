@@ -1,4 +1,3 @@
-#Style FOR WEB APP
 <!DOCTYPE html>
 <html>
 <head>
@@ -11,8 +10,8 @@
             align-items:center;
             padding:12px 20px;
             background:#f7f7f7;
-            border-bottom:1px solid #ddd;}
-
+            border-bottom:1px solid #ddd;
+        }
         .right-links { display:flex; align-items:center; gap:12px; }
         nav a { text-decoration:none; color:#1a1a1a; font-weight:600; }
         nav a:hover { text-decoration:underline; }
@@ -20,19 +19,19 @@
     </style>
 </head>
 <body>
-<nav>
 
-  <!-- LEFT SECTION -->
+<nav>
+  <!-- left area (site title / logo) -->
   <div>
     <a href="{{ url_for('index') }}">Home</a>
   </div>
 
-  <!-- RIGHT SECTION -->
+  <!-- right area: show Login/Register when NOT logged in, else show Logged-in + Logout -->
   <div class="right-links">
     {# Check multiple keys to be robust depending on your app #}
     {% if session.get('user_id') or session.get('username') %}
       <span>Logged in as <strong>{{ session.get('username') or session.get('user_email') or 'user' }}</strong></span>
-    
+      <a href="{{ url_for('logout') }}">Logout</a>
     {% else %}
       <a href="{{ url_for('login') }}">Login</a>
       <a href="{{ url_for('register') }}">Register</a>
