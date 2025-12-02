@@ -1,0 +1,193 @@
+<!-- REGISTRATION PAGE -->
+{% extends "base.html" %}
+{% block content %}
+
+<style>
+.register-wrapper {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    margin-top: 40px;
+}
+
+.register-card {
+    background: #fff;
+    width: 600px;
+    padding: 30px 35px;
+    border-radius: 14px;
+    box-shadow: 0 6px 18px rgba(0,0,0,0.08);
+    border: 1px solid #e5e5e5;
+}
+
+.register-card h2 {
+    margin: 0 0 20px;
+    font-size: 1.9rem;
+}
+
+.form-group {
+    margin-bottom: 16px;
+    display: flex;
+    flex-direction: column;
+}
+
+label {
+    font-weight: 600;
+    margin-bottom: 6px;
+}
+
+input[type="text"],
+input[type="email"],
+input[type="password"],
+input[type="date"],
+select,
+textarea {
+    padding: 10px;
+    border: 1px solid #dadada;
+    border-radius: 8px;
+    font-size: 14px;
+}
+
+textarea {
+    resize: vertical;
+    min-height: 80px;
+}
+
+.form-row {
+    display: flex;
+    gap: 16px;
+    flex-wrap: wrap;
+}
+
+.form-col {
+    flex: 1 1 260px;
+    display: flex;
+    flex-direction: column;
+}
+
+.password-row {
+    display: flex;
+}
+
+.password-row input {
+    flex: 1;
+}
+
+.show-btn {
+    margin-left: 8px;
+    padding: 8px 12px;
+    border-radius: 8px;
+    border: 1px solid #999;
+    background: #f2f2f2;
+    cursor: pointer;
+}
+
+.btn-primary {
+    width: 100%;
+    padding: 12px;
+    margin-top: 10px;
+    border: none;
+    border-radius: 8px;
+    background: #4b4bff;
+    color: #fff;
+    font-size: 15px;
+    cursor: pointer;
+}
+
+.btn-primary:hover {
+    background: #3c3ce6;
+}
+
+.login-link {
+    margin-top: 14px;
+    text-align: center;
+}
+</style>
+
+
+<div class="register-wrapper">
+    <div class="register-card">
+        <h2>Create Account</h2>
+
+        <form method="POST">
+
+            <div class="form-group">
+                <label>Full name *</label>
+                <input type="text" name="full_name" required>
+            </div>
+
+            <div class="form-group">
+                <label>Email *</label>
+                <input type="email" name="email" required>
+            </div>
+
+            <div class="form-row">
+                <div class="form-col">
+                    <label>Password *</label>
+                    <div class="password-row">
+                        <input type="password" name="password" id="password" required>
+                        <button type="button" class="show-btn" onclick="
+                            const p = document.getElementById('password');
+                            p.type = (p.type === 'password' ? 'text' : 'password');
+                        ">Show</button>
+                    </div>
+                </div>
+
+                <div class="form-col">
+                    <label>Confirm Password *</label>
+                    <input type="password" name="confirm_password" required>
+                </div>
+            </div>
+
+            <div class="form-row">
+                <div class="form-col">
+                    <label>Phone *</label>
+                    <input type="text" name="phone" placeholder="+973..." required>
+                </div>
+
+                <div class="form-col">
+                    <label>Date of birth *</label>
+                    <input type="date" name="date_of_birth" required>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label>Address *</label>
+                <textarea name="address" required></textarea>
+            </div>
+
+            <div class="form-row">
+                <div class="form-col">
+                    <label>Emergency contact name *</label>
+                    <input type="text" name="emergency_name" required>
+                </div>
+
+                <div class="form-col">
+                    <label>Emergency contact phone *</label>
+                    <input type="text" name="emergency_phone" required>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label>Insurance number (optional)</label>
+                <input type="text" name="insurance_number">
+            </div>
+
+            <div class="form-group">
+                <label>Role *</label>
+                <select name="role" required>
+                    <option value="patient">Patient</option>
+                    <option value="doctor">Doctor</option>
+                </select>
+            </div>
+
+            <button type="submit" class="btn-primary">Create account</button>
+
+            <div class="login-link">
+                <a href="{{ url_for('login') }}">Already have an account? Login</a>
+            </div>
+
+        </form>
+    </div>
+</div>
+
+{% endblock %}
