@@ -1,0 +1,36 @@
+{% extends "base.html" %}
+{% block content %}
+
+<style>
+.confirm-card {
+  max-width: 700px;
+  margin: 24px auto;
+  background:#fff;
+  padding:18px;
+  border-radius:10px;
+  box-shadow:0 6px 18px rgba(0,0,0,0.06);
+  border:1px solid #eee;
+}
+.btn { display:inline-block; padding:10px 16px; border-radius:8px; background:#4b4bff; color:#fff; border:none; cursor:pointer; }
+.btn.danger { background:#e23b3b; margin-left:8px; }
+.btn.secondary { background:#666; margin-left:8px; color:#fff; text-decoration:none; padding:10px 12px; border-radius:8px; }
+</style>
+
+<div class="confirm-card">
+  <h2>Confirm delete</h2>
+  <p>Are you sure you want to delete the appointment below?</p>
+
+  <div style="background:#fafafa; padding:12px; border-radius:8px; margin:12px 0;">
+    <strong>Patient:</strong> {{ appointment.patient_username | e }} <br>
+    <strong>Doctor:</strong> {{ appointment.doctor_name | e }} <br>
+    <strong>Date / Time:</strong> {{ appointment.date | e }} {{ appointment.time | e }} <br>
+    <div style="margin-top:8px; color:#666;">{{ appointment.reason | e }}</div>
+  </div>
+
+  <form method="post" action="{{ url_for('manage_appointment_view', apt_id=appointment.id) }}">
+    <button type="submit" name="confirm" value="yes" class="btn danger" onclick="return confirm('Delete this appointment?')">Yes, delete</button>
+    <a href="{{ url_for('dashboard') }}" class="btn secondary">Cancel</a>
+  </form>
+</div>
+
+{% endblock %}
